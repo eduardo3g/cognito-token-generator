@@ -3,10 +3,12 @@ const AWS = require('aws-sdk');
 
 AWS.config.update({ region: process.env.COGNITO_REGION });
 
-const clientId = process.env.COGNITO_CLIENT_ID;
-const userPoolId = process.env.COGNITO_USER_POOL_ID;
-const username = process.env.COGNITO_USERNAME;
-const password = process.env.COGNITO_PASSWORD;
+const {
+  COGNITO_CLIENT_ID: clientId,
+  COGNITO_USER_POOL_ID: userPoolId,
+  COGNITO_USERNAME: username,
+  COGNITO_PASSWORD: password,
+} = process.env;
 
 (async () => {
   const cognito = new AWS.CognitoIdentityServiceProvider({
@@ -34,4 +36,4 @@ const password = process.env.COGNITO_PASSWORD;
     console.error('getCognitoToken', error);
   }
   return result;
-})()
+})();
